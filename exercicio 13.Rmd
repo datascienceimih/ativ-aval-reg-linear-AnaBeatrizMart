@@ -1,0 +1,37 @@
+Neste exercício, você criará alguns dados simulados e ajustará modelos
+de regressão lineares simples a ele. Certifique-se de useset.seed (1) 
+antes de iniciar parte (a) para garantir resultados consistentes.
+
+Usando a função thernorm (), crie um vetor, x, contendo 100 observações extraídas
+de uma distribuição N (0,1). Isso representa uma característica, X.
+
+```{r}
+x <- rnorm(100)  # mean=0, sd=1 is default
+```
+
+Usando a função norm (), crie um vetor, eps, contendo 100
+observações extraídas de uma distribuição N (0,0.25), 
+ou seja, uma distribuição normal com média zero e variância de 0,25.
+
+```{r}
+norm <- rnorm(100, sd=0.25^0.5)
+```
+
+Usando x e eps, gere um vetor y de acordo com o modelo.
+Qual é o comprimento do vetor?
+Quais são os valores de β0 e β1 neste modelo linear?
+
+```{r}
+y <- -1 + 0.5*x + norm
+length(y) # o vetor é 100
+
+```
+
+Crie um gráfico de dispersão
+exibindo o relacionamento entre x and y. Comente o que você observa.
+ 
+```{r}
+plot(x,y) # é linear e a relação é positiva
+```
+
+
