@@ -1,0 +1,46 @@
+## Exercicio
+
+8. Esta questão envolve o uso de regressão linear simples no conjunto de dados Auto.
+
+(a) Use a função lm() para executar uma regressão linear simples com MPG como resposta e horsepower como preditor. Use a função summary() para imprimir os resultados. Comente a saída.
+
+```{r}
+install.packages("ISLR")
+library (ISLR) # carregando o banco
+
+reg <- lm(mpg ~ horsepower, data = Auto) # regressão
+
+summary(reg) #estatisticas descritivas
+```
+
+# Existe uma relação entre o preditor e a resposta?
+
+Sim, pois horsepower explica em 60,5% a variável mpg e o p-value é muito inferior a 0.
+
+# A relação entre o preditor e a resposta é positiva ou negativa?
+É negativa ( -6.742)
+
+# Qual é o predito associado a um intervalo de confiança de 98%? Quais são os intervalos de confiança e predição de 95% associados?
+
+```{r}
+confint(reg, level= 0.98)
+confint(reg, level= 0.90)
+```
+
+# Plote a resposta e o preditor. Use a função abline () para exibir a linha de regressão de mínimos quadrados
+
+```{r}
+attach(Auto)
+plot(mpg~horsepower, main ="Regressão 1", xlab = " Horsepower", ylab ="MPG")
+abline(coef = coef(reg), col ="pink")
+```
+
+Use a função plot () para produzir plotagens de diagnóstico do ajuste de regressão de mínimos quadrados. Comente sobre quaisquer problemas que você vir com o ajuste.
+
+```{r}
+plot(reg, col="pink", main="
+                                      - C")
+```
+
+- A regressão não é linear. 
+
