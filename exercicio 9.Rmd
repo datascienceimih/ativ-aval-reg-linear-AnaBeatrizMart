@@ -1,0 +1,44 @@
+## Exercicio
+
+Esta questão envolve o uso de regressão linear múltipla no conjunto Autodata.
+
+```{r}
+install.packages("ISLR")
+library (ISLR) # carregando o banco
+```
+Produzir uma matriz de dispersão que inclua todas as variáveis no conjunto de dados.
+
+```{r}
+plot(Auto)
+```
+
+Calcule a matriz de correlações entre as variáveis usando o function cor (). Você precisará excluir, então, variável name que é qualitativa.
+
+```{r}
+cor(subset(Auto, select=-name))
+```
+
+Use a função lm () para executar uma regressão linear múltipla com mpg como resposta e todas as outras variáveis, exceto name como preditores. Por exemplo:
+
+```{r}
+reg2 <- lm(mpg~.-name, data=Auto)
+summary(reg2)
+```
+
+
+Existe uma relação entre os preditores e a resposta?
+Sim, uma relação de 82%.
+
+Quais preditores parecem ter uma relação estatisticamente significante com a resposta?
+weither, year e origin.
+
+O que o coeficiente de variação variável sugere?
+que os carros mais velhos tem mpg melhores
+
+Use a função plot () para produzir gráficos de diagnóstico do ajuste da regressão linear. Comente sobre quaisquer problemas que você vir com o ajuste. Os gráficos residuais sugerem quaisquer exceções incomumente grandes? O gráfico de alavancagem identifica qualquer observação com alavancagem excepcionalmente alta?
+
+```{r}
+plot(reg2, col="yellow")
+```
+
+- A regressão não é linear
