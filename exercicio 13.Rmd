@@ -1,0 +1,100 @@
+Neste exercício, você criará alguns dados simulados e ajustará modelos
+de regressão lineares simples a ele. Certifique-se de useset.seed (1) 
+antes de iniciar parte (a) para garantir resultados consistentes.
+
+Usando a função thernorm (), crie um vetor, x, contendo 100 observações extraídas
+de uma distribuição N (0,1). Isso representa uma característica, X.
+
+```{r}
+x <- rnorm(100)  # mean=0, sd=1 is default
+```
+
+Usando a função norm (), crie um vetor, eps, contendo 100
+observações extraídas de uma distribuição N (0,0.25), 
+ou seja, uma distribuição normal com média zero e variância de 0,25.
+
+```{r}
+norm <- rnorm(100, sd=0.25^0.5)
+```
+
+Usando x e eps, gere um vetor y de acordo com o modelo.
+Qual é o comprimento do vetor?
+Quais são os valores de β0 e β1 neste modelo linear?
+
+```{r}
+y <- -1 + 0.5*x + norm
+length(y) # o vetor é 100
+
+```
+
+Crie um gráfico de dispersão
+exibindo o relacionamento entre x and y. Comente o que você observa.
+ 
+```{r}
+plot(x,y) # é linear e a relação é positiva
+```
+
+
+plot(y~x); abline(lm.fit1, col ="red") 
+legend("bottomright", c("Regression line"), lwd=1, col="red",bty ="n")
+
+```{r}
+eps2 <- rnorm(100, sd=0.1)  
+y2 <- -1 + 0.5*x + eps2
+reg2 <- lm(y2 ~ x)
+summary(reg2)
+plot(x, y2)
+abline(-1, 0.5, col="blue") 
+abline(reg2, col="red")  
+legend(x = c(-2,-0.5),
+       y = c(-0.5,0),
+       legend = c("população", "modelo"),
+       col = c("blue","red"), lwd=2 )
+```
+
+```
+
+Agora, ajuste um modelo de regressão polinomial que prevê o uso de xe x2. Existe evidência de que o termo quadrático melhora o ajuste do modelo? Explique sua resposta
+
+```{r}
+eps2 <- rnorm(100, sd=0.1) 
+y2 <- -1 + 0.5*x + eps2
+reg3<- lm(y2 ~ x)
+summary(reg3)
+plot(x, y2)
+abline(-1, 0.5, col="blue")   
+abline(reg3, col="red")    
+legend(x = c(-2,-0.5),
+       y = c(-0.5,0),
+       legend = c("população", "modelo"),
+       col = c("blue","red"), lwd=2 )
+```
+
+A variação diminui ao longo da linha de regressão.
+
+Repita (a) - (f) depois de modificar o processo de geração de dados de uma maneira que não haja nenhum ruído nos dados. O modelo (3,39) deve permanecer o mesmo. Você pode fazer isso diminuindo a variação da distribuição normal usada para gerar o termo de erro em (b). Descreva seus resultados.
+
+```{r}
+eps3 <- rnorm(100, sd=1)  
+y3 <- -1 + 0.5*x + eps3
+reg4 <- lm(y3 ~ x)
+summary(reg4)
+plot(x, y3)
+abline(-1, 0.5, col="blue")   
+abline(reg4, col="red")    
+legend(x = c(0,2),
+       y = c(-4,-3),
+       legend = c("população", "modelo"),
+       col = c("blue","red"), lwd=2 )
+```
+
+Estimativas de coeficientes são mais distintas do valor real (mas não muito). E os valores de RSE e R ^ 2 são piores.
+
+Quais são os intervalos de confiança para β0 e β1 baseados no conjunto de dados originais, no conjunto de dados mais ruidosos e no conjunto de dados menos ruidoso? Comente seus resultados.
+
+```{r}
+confint(reg2)
+confint(reg3)
+confint(reg4)
+```
+Intervalos de confiança são mais rigorosos para populações originais com menor variância.
